@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <!-- "defer" is a Boolean attribute which is used to specify that script is executed when the page has finished parsing. Parsing is basically taking in HTML code and extracting relevant information like the title of the page, paragraphs in the page, headings in the page, links, bold text etc -->
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- The class: board will be used in css, and the id: board will be used in the js -->
+    <div class="board" id="board">
+      <!-- I was able to make 9 cell divs by typing .cell*9 -->
+      <!-- I then denote each one by ctrl + clicking with data-cell -->
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+    </div>
+    <div class="winning-message" id="winningMessage">
+      <div data-winning-message-text>X Wins!</div>
+      <button id="restartButton">Restart</button>
+    </div>
+  </body>
+</html>

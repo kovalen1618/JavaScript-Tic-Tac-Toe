@@ -1,0 +1,176 @@
+/* "*" is the everything selector */
+
+/* This selects everything to make styling widths and heights easier */
+*, *::after, *::before {
+  box-sizing: border-box
+}
+
+/* CSS Variables */ 
+:root {
+  --cell-size: 100px;
+  /* Using mark-size to make the X's and O's a little smaller than the cells */
+  --mark-size: calc(var(--cell-size) * .9);
+}
+
+/* Remove margins so that placing full backgrounds is filling the page */
+body {
+  margin: 0;
+}
+
+/* Will allow the board to fill the entire screen and be centered. 
+The grid then allows us to make the signature tic-tac-toe design */
+.board {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  /* To ensure X's and O's are always centered within their cells */
+  justify-items: center;
+  align-items: center;
+  /* Creating the cell grid */
+  grid-template-columns: repeat(3, auto)
+}
+
+/* The spaces for X's and O's */
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid black;
+  /* Used to display contents within the cell such as the X's and O's */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* A pointer cursor for all the cells */
+  cursor: pointer;
+}
+
+/* Each of these cell childs is used to remove the border on a certain edge */
+/* I used Shift + Alt + Down to copy and paste each line of code down */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+/* "n" takes the place of the child and it will be timed by 3 and then added by 1. 
+So, 3*1 + 1 = 4, 3*0 + 1 = 1, and 3*2 + 1 = 7, which are all the left side cells */
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.cell:nth-child(3n) {
+  border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8) {
+  border-bottom: none;
+}
+
+/* If a cell already has an element inside it, then the cursor will change to a not allowed */
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
+  background-color: black;
+}
+
+/* Add hover effects to the board and let lightgrey override the black above it when doing so */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  background-color: lightgrey;
+}
+
+/* Creating an X using pseudo-elements. This will only create a bar, however */
+/* The ":not(.x):not(.circle)" make it to where the elements will not hover over an already filled cell */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+  /* A content of an empty string so these before and after elements have something to render in */
+  content: ''; 
+  position: absolute;
+  width: calc(var(--mark-size) * .15);
+  height: var(--mark-size);
+}
+
+/* This will change the bars to form an X */
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+  transform: rotate(-45deg);
+}
+
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+  content: ''; 
+  position: absolute;
+  border-radius: 50%
+}
+
+/* The ring, that is actually a large circle */
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+}
+
+/* The hollow part of the big ring above, that is actually just a smaller white circle */
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+  width: calc(var(--mark-size) * .7);
+  height: calc(var(--mark-size) * .7);
+  background-color: white;
+}
+
+/* Display the restart button in the center and have a winning message */
+.winning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .9);
+  justify-content: center;
+  align-items: cemter;
+  color: white;
+  font-size: 5rem;
+  /* Stacks text and button vertically */
+  flex-direction: column;
+}
+
+/* Restart button styling */
+.winning-message button {
+  font-size: 3rem;
+  background-color: white;
+  border: 1px solid black;
+  padding: .25em .5em;
+  cursor: pointer;
+}
+
+/* Invert button colors */
+.winning-message button:hover {
+  background-color: black;
+  color: white;
+  border-color: white; 
+}
+
+.winning-message.show {
+  display: flex;
+}
