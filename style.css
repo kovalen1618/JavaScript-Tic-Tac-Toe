@@ -1,15 +1,17 @@
 /* "*" is the everything selector */
 
 /* This selects everything to make styling widths and heights easier */
-*, *::after, *::before {
-  box-sizing: border-box
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
 }
 
-/* CSS Variables */ 
+/* CSS Variables */
 :root {
   --cell-size: 100px;
   /* Using mark-size to make the X's and O's a little smaller than the cells */
-  --mark-size: calc(var(--cell-size) * .9);
+  --mark-size: calc(var(--cell-size) * 0.9);
 }
 
 /* Remove margins so that placing full backgrounds is filling the page */
@@ -29,7 +31,7 @@ The grid then allows us to make the signature tic-tac-toe design */
   justify-items: center;
   align-items: center;
   /* Creating the cell grid */
-  grid-template-columns: repeat(3, auto)
+  grid-template-columns: repeat(3, auto);
 }
 
 /* The spaces for X's and O's */
@@ -96,9 +98,9 @@ So, 3*1 + 1 = 4, 3*0 + 1 = 1, and 3*2 + 1 = 7, which are all the left side cells
 .board.x .cell:not(.x):not(.circle):hover::before,
 .board.x .cell:not(.x):not(.circle):hover::after {
   /* A content of an empty string so these before and after elements have something to render in */
-  content: ''; 
+  content: "";
   position: absolute;
-  width: calc(var(--mark-size) * .15);
+  width: calc(var(--mark-size) * 0.15);
   height: var(--mark-size);
 }
 
@@ -113,14 +115,13 @@ So, 3*1 + 1 = 4, 3*0 + 1 = 1, and 3*2 + 1 = 7, which are all the left side cells
   transform: rotate(-45deg);
 }
 
-
 .cell.circle::before,
 .cell.circle::after,
 .board.circle .cell:not(.x):not(.circle):hover::before,
 .board.circle .cell:not(.x):not(.circle):hover::after {
-  content: ''; 
+  content: "";
   position: absolute;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 /* The ring, that is actually a large circle */
@@ -133,8 +134,8 @@ So, 3*1 + 1 = 4, 3*0 + 1 = 1, and 3*2 + 1 = 7, which are all the left side cells
 /* The hollow part of the big ring above, that is actually just a smaller white circle */
 .cell.circle::after,
 .board.circle .cell:not(.x):not(.circle):hover::after {
-  width: calc(var(--mark-size) * .7);
-  height: calc(var(--mark-size) * .7);
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
   background-color: white;
 }
 
@@ -146,9 +147,9 @@ So, 3*1 + 1 = 4, 3*0 + 1 = 1, and 3*2 + 1 = 7, which are all the left side cells
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .9);
+  background-color: rgba(0, 0, 0, 0.9);
   justify-content: center;
-  align-items: cemter;
+  align-items: center;
   color: white;
   font-size: 5rem;
   /* Stacks text and button vertically */
@@ -160,7 +161,7 @@ So, 3*1 + 1 = 4, 3*0 + 1 = 1, and 3*2 + 1 = 7, which are all the left side cells
   font-size: 3rem;
   background-color: white;
   border: 1px solid black;
-  padding: .25em .5em;
+  padding: 0.25em 0.5em;
   cursor: pointer;
 }
 
@@ -168,7 +169,7 @@ So, 3*1 + 1 = 4, 3*0 + 1 = 1, and 3*2 + 1 = 7, which are all the left side cells
 .winning-message button:hover {
   background-color: black;
   color: white;
-  border-color: white; 
+  border-color: white;
 }
 
 .winning-message.show {
